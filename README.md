@@ -1,2 +1,2 @@
 # Quiz App
-Created by: Shannon Lichtenwaler & Lazandrea Celestine
+Created by: Shannon Lichtenwalter & Lazandrea Celestine
