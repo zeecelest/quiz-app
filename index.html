@@ -10,12 +10,36 @@
 </head>
 </head>
 <body>
-  <main> <!-- content holder-->
-    <h1></h1> <!-- fill with quiz name on opening page, fill with questions on question pages-->
-    <section> <!---input/radiobuttons pushed in -->
+  <!-- The following element could be used for our startPage, Correct/Wrong Answers Pages, and finishedQuiz page
+  <main> 
+    <h1></h1> <!-- fill with quiz name on opening page, fill with questions on question pages
+    <section> <!---input/radiobuttons pushed in
     </section>
-    <button type="submit"></button> <!-- example: $(.submit).html('Launch') -->
+    <button type="submit" class="submit"></button> <!-- example: $(.submit).html('Launch')
     </main>
+ -->
+
+ <main>
+<h1>Questions</h1>
+ <form class="js-quiz-questions" action="" method=""></form>
+<input type="radio" name="js-answer-options" id="answer-option-one">
+<label for = "answer-option-one">TEST</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-two">
+<label for = "answer-option-two">TESTing</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-three">
+<label for = "answer-option-three">TESTer</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-four">
+<label for = "answer-option-four">TESTingg</label>
+<br>
+ <button type="submit" class="submit">Roger, Ready to check asnwer</button>
+ </form>
+ </main>
+
+
+
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="index.js"></script>

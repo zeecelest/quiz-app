@@ -7,3 +7,4 @@ const STORE = [
   { id: cuid(), question: 'Fourth question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' },
   { id: cuid(), question: 'Fifth question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' },
 ]
+
