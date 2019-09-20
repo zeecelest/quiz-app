@@ -8,3 +8,38 @@ const STORE = [
   { id: cuid(), question: 'Fifth question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' },
 ]
 
+
+function renderStartPage(){
+  console.log('renderStartPage works');
+}
+
+
+function renderQuestionPage(){
+  console.log('renderQuestion page works');
+}
+
+function renderCorrectAnswerPage(){
+  console.log('renderCorrectAnswerPage works');
+}
+
+function renderWrongAnswerPage(){
+  console.log('renderWrongAnswer Page works');
+}
+
+function renderEndPage(){
+  console.log('renderEndPage works');
+}
+
+
+
+
+
+function handleNewPageLoad(){
+  renderStartPage();
+  renderQuestionPage();
+  renderCorrectAnswerPage();
+  renderWrongAnswerPage();
+  renderEndPage();
+}
+
+$(handleNewPageLoad)
