@@ -1,0 +1,12 @@
+body {
+  background-color: black; /**change to photo**/
+}
+
+main {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: white;
+  width: 50%;
+  height: 400px;
+}
+
