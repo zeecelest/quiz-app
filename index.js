@@ -1,6 +1,6 @@
 'use strict';
 
-const STORE = [
+const QUESTIONS = [
   { id: cuid(), question: 'First question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' }, //answers can be an array of answers
   { id: cuid(), question: 'Second question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' },
   { id: cuid(), question: 'Third question goes here', answers: 'Answer choices  go here', correct: 'correct answer goes here' },
@@ -9,7 +9,7 @@ const STORE = [
 ]
 
 /* initializing userScore and questionNumber to be 0 so that 
-we can userScore++ and questionNumber++ as our app  runs.
+we can userScore++ and questionNumber++ as our app runs.
 */
 
 let userScore = 5;
@@ -20,12 +20,12 @@ let questionCount = 8;
 // and to set the questionCount back to 0.
 function resetUserScore(){
   userScore = 0;
-  console.log(userScore);
+  console.log('resetuserScore is working');
 }
 
 function resetQuestionCount(){
   questionCount= 0;
-  console.log(questionCount);
+  console.log('resetQuestionCount is working');
 }
 
 /*renderStartPage should run automatically when the page is loaded.
@@ -40,25 +40,40 @@ function renderStartPage(){
   console.log('renderStartPage works');
   resetUserScore();
   resetQuestionCount();
-  $('main').html(`
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  `)
+  // $('main').html(`
+  // <h1>Space Quiz! </h1>
+  //   <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
+  //   <p>What do you know about space?</p>
+  //   <button type="submit" class="submit">Launch</button>
+  // `)
 }
 
+// generateQuestion will be called by renderQuestionPage. 
+// we will possibly use a .forEach loop to go through the
+// array of objects of our QUESTIONS bank.
+// we will then return at string that will be our question.
+//we will need to figure out how to loop through the bank and retrieve 
+//a question without the questions getting repeated.
+
+function generateQuestion(){
+  console.log('generateQuestion works');
+
+}
+
+//this function will sort through our QUESTIONS bank array of objects.
+//It will return an array of answers that we will use with our renderQuestionPage. 
+function generateAnswers(){
+  console.log('generateAnswers works')
+}
+/* renderQuestionPage will listen for a submit event on the start quiz button or on the
+next question button. It will push a text string into the main section of the html document
+using the .html() method to render the content for the question page. 
+*/
 
 function renderQuestionPage(){
   console.log('renderQuestion page works');
+  // generateQuestion();
+  // generateAnswers();
 }
 
 function renderCorrectAnswerPage(){
@@ -74,6 +89,12 @@ function renderEndPage(){
 }
 
 
+//listens for a button click on Retake quiz. If clicked it will call
+// the renderStartPage function.
+function renderNewQuiz(){
+  console.log('renderNewQuiz is working')
+}
+
 
 
 
@@ -83,6 +104,7 @@ function handleNewPageLoad(){
   renderCorrectAnswerPage();
   renderWrongAnswerPage();
   renderEndPage();
+  renderNewQuiz();
 }
 
 $(handleNewPageLoad)
