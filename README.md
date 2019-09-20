@@ -1,1 +1,2 @@
-# zee_shannon_quiz_app
+# Quiz App
+Created by: Shannon Lichtenwaler & Lazandrea Celestine
