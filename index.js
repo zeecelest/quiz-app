@@ -1,17 +1,12 @@
 'use strict';
 //adding the quiz questions
-//since we there are more than answer for each question, how do we write that? array?
 const QUESTIONS = [
   {
     id: cuid(),
     question: 'What is the smallest planet in the Solar System?',
     answers: ['Mercury', 'Pluto', 'Jupiter', 'Mars'],
-    //create variables for right and wrong answer
-    // let correctAnswers = correctResults;
-    // let wrongAnswers = wrongAnswers;
-
     correct: 'Mercury'
-  }, //answers can be an array of answers
+  },
   {
     id: cuid(),
     question: 'What is the hottest planet in the Solar System?',
@@ -70,12 +65,12 @@ function renderStartPage() {
   console.log('renderStartPage works');
   resetUserScore();
   resetQuestionCount();
-  // $('main').html(`
-  // <h1>Space Quiz! </h1>
-  //   <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
-  //   <p>What do you know about space?</p>
-  //   <button type="submit" class="js-startQuizButton">Launch</button>
-  // `)
+  $('main').html(`
+   <h1>Space Quiz!</h1>
+    <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
+    <p>What do you know about space?</p>
+    <button type="submit" class="js-startQuizButton">Launch</button>
+   `);
 }
 
 // generateQuestion will be called by renderQuestion page (which is listening for submit events on
@@ -122,6 +117,7 @@ function renderQuestionPage() {
   //questionCount += 1
   //if (questionCount > 5){
   // renderEndPage();
+  //    break;
   //};
   // generateQuestion();
   // generateAnswers();
