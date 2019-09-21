@@ -136,7 +136,9 @@ function fetchPageData() {
 
 function createQuestionPageData() {
   let pageObject = fetchPageData();
-  console.log(pageObject);
+  let question = pageObject.question;
+  let answers = pageObject.answers;
+  let correctAnswer = pageObject.correct;
 }
 
 function renderQuestionPage() {
