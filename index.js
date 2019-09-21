@@ -69,7 +69,7 @@ function renderStartPage() {
    <h1>Space Quiz!</h1>
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
-    <button type="submit" class="js-startQuizButton">Launch</button>
+    <button type="submit" class="js-generateQuestionButton">Launch</button>
    `);
 }
 
@@ -112,13 +112,26 @@ using the .html() method to render the content for the question page.
 // if we approach it this way we would need to remove
 //renderEndPage() from handleNewPageLoad();
 
+function fetchPageData() {
+  for (let i = 0; i < QUESTIONS.length; i++) {}
+}
+
+function createQuestionPageData() {
+  let pageObject = fetchPageData();
+}
 function renderQuestionPage() {
-  console.log('renderQuestion page works');
-  //questionCount += 1
-  //if (questionCount > 5){
-  // renderEndPage();
-  //    break;
-  //};
+  $('main').on('click', '.js-generateQuestionButton', function() {
+    //need to figure out how to get .submit() to work
+    event.preventDefault();
+    console.log('renderQuestion page works');
+    questionCount += 1;
+    if (questionCount > 5) {
+      renderEndPage();
+    }
+    //create new questionPageData
+    //let questionPageData =
+  });
+
   // generateQuestion();
   // generateAnswers();
 }
