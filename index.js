@@ -5,37 +5,36 @@ const QUESTIONS = [
   {
     id: cuid(),
     question: 'What is the smallest planet in the Solar System?',
-    answers: '',
+    answers: ['Mercury', 'Pluto', 'Jupiter', 'Mars'],
     //create variables for right and wrong answer
-      // let correctAnswers = correctResults;
-      // let wrongAnswers = wrongAnswers;
+    // let correctAnswers = correctResults;
+    // let wrongAnswers = wrongAnswers;
 
-
-    correct: 'correct answer goes here'
+    correct: 'Mercury'
   }, //answers can be an array of answers
   {
     id: cuid(),
     question: 'What is the hottest planet in the Solar System?',
-    answers: 'Answer choices  go here',
-    correct: 'correct answer goes here'
+    answers: ['Mars', 'Venus', 'Sun', 'Saturn'],
+    correct: 'Venus'
   },
   {
     id: cuid(),
     question: 'What planet is closest in size to Earth?',
-    answers: 'Answer choices  go here',
-    correct: 'correct answer goes here'
+    answers: ['Uranus', 'Saturn', 'Venus', 'Jupiter'],
+    correct: 'Venus'
   },
   {
     id: cuid(),
-    question: 'What is the brightest planet in the night sky?, answers:',
-    answer: 'Answer choices  go here',
-    correct: 'correct answer goes here'
+    question: 'What is the brightest planet in the night sky?',
+    answer: ['Venus', 'Earth', 'Saturn', 'Mars'],
+    correct: 'Venus'
   },
   {
     id: cuid(),
     question: 'What is the third planet from the Sun?',
-    answers: 'Answer choices  go here',
-    correct: 'correct answer goes here'
+    answers: ['Saturn', 'Earth', 'Pluto', 'Sun'],
+    correct: 'Earth'
   }
 ];
 
@@ -44,7 +43,7 @@ we can userScore++ and questionNumber++ as our app runs.
 */
 
 let userScore = 0;
-let questionCount = 0; 
+let questionCount = 0;
 
 //if the user presses the Retake Quiz Button, these functions will
 //be called within the renderStartPage to set the UserScore back to 0.
@@ -79,7 +78,7 @@ function renderStartPage() {
   // `)
 }
 
-// generateQuestion will be called by renderQuestion page (which is listening for submit events on 
+// generateQuestion will be called by renderQuestion page (which is listening for submit events on
 // start Quiz or Next Question buttons.
 // we will possibly use a .forEach loop to go through the
 // array of objects of our QUESTIONS bank.
@@ -89,7 +88,7 @@ function renderStartPage() {
 //maybe useing .pop() to remove it from the array completely?
 //however, we would need to be able to re-cycle through the questions
 //when retake quiz is pressed. So permanentely changing the QUESTION bank
-//probably would not work. 
+//probably would not work.
 //maybe we can give each queston a property of "asked" and can be initally set to false.
 // The generate question function can only pull questions marked as false.
 // if the question is asked it can set the asked value to true.
@@ -113,7 +112,7 @@ next question button. It will push a text string into the main section of the ht
 using the .html() method to render the content for the question page. 
 */
 
-//also thought-- maybe we have an if statement that 
+//also thought-- maybe we have an if statement that
 //if questionCount > 5 then we run the render End Page function.
 // if we approach it this way we would need to remove
 //renderEndPage() from handleNewPageLoad();
@@ -130,8 +129,8 @@ function renderQuestionPage() {
 
 //renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
 // However it will only run if the userAnswer === correct answer in the question bank
-//we will need a way to retrieve the user's Answer and compare it to the correct answer for 
-// the question we have asked. 
+//we will need a way to retrieve the user's Answer and compare it to the correct answer for
+// the question we have asked.
 function renderCorrectAnswerPage() {
   console.log('renderCorrectAnswerPage works');
   // userScore += 1;
@@ -147,10 +146,10 @@ function renderWrongAnswerPage() {
 //renderEndPage will listen for a submit event on Next Question button.
 // if question count is >5 then renderEndPage will use the .html method to push
 // in the html to our main element to render the End Page.
-// Also within this function, we will need to utilitize the value for user score 
+// Also within this function, we will need to utilitize the value for user score
 // that we have been adding to in the renderCorrectAnswerPage();
-// ALTERNITAVELY-- renderEndPage can be called by renderQuestionPage if the 
-//question count > 5. 
+// ALTERNITAVELY-- renderEndPage can be called by renderQuestionPage if the
+//question count > 5.
 // if we do this we need to remove renderEndPage() from handleNewPageLoad().
 function renderEndPage() {
   console.log('renderEndPage works');
@@ -161,7 +160,6 @@ function renderEndPage() {
 function renderNewQuiz() {
   console.log('renderNewQuiz is working');
 }
-
 
 /*the functions within hadleNewPageLoad() are all of the base functions that we need
 to run when the page is ready. These are the functions that either need to run automatically
