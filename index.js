@@ -5,31 +5,36 @@ const QUESTIONS = [
     id: cuid(),
     question: 'What is the smallest planet in the Solar System?',
     answers: ['Mercury', 'Pluto', 'Jupiter', 'Mars'],
-    correct: 'Mercury'
+    correct: 'Mercury',
+    ask: false
   },
   {
     id: cuid(),
     question: 'What is the hottest planet in the Solar System?',
     answers: ['Mars', 'Venus', 'Sun', 'Saturn'],
-    correct: 'Venus'
+    correct: 'Venus',
+    ask: false
   },
   {
     id: cuid(),
     question: 'What planet is closest in size to Earth?',
     answers: ['Uranus', 'Saturn', 'Venus', 'Jupiter'],
-    correct: 'Venus'
+    correct: 'Venus',
+    ask: false
   },
   {
     id: cuid(),
     question: 'What is the brightest planet in the night sky?',
     answer: ['Venus', 'Earth', 'Saturn', 'Mars'],
-    correct: 'Venus'
+    correct: 'Venus',
+    ask: false
   },
   {
     id: cuid(),
     question: 'What is the third planet from the Sun?',
     answers: ['Saturn', 'Earth', 'Pluto', 'Sun'],
-    correct: 'Earth'
+    correct: 'Earth',
+    ask: false
   }
 ];
 
@@ -53,6 +58,13 @@ function resetQuestionCount() {
   console.log('resetQuestionCount is working');
 }
 
+function resetQuestionAsked() {
+  for (let i = 0; i < QUESTIONS.length; i++) {
+    QUESTIONS[i].ask = false;
+    //console.log(QUESTIONS[i]);
+  }
+}
+
 /*renderStartPage should run automatically when the page is loaded.
 It will use the .html() method to push a string of html content to 
 the <main> section in the html. This will allow for the start page
@@ -65,6 +77,7 @@ function renderStartPage() {
   console.log('renderStartPage works');
   resetUserScore();
   resetQuestionCount();
+  resetQuestionAsked();
   $('main').html(`
    <h1>Space Quiz!</h1>
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
@@ -113,12 +126,19 @@ using the .html() method to render the content for the question page.
 //renderEndPage() from handleNewPageLoad();
 
 function fetchPageData() {
-  for (let i = 0; i < QUESTIONS.length; i++) {}
+  for (let i = 0; i < QUESTIONS.length; i++) {
+    if (QUESTIONS[i].ask === false) {
+      QUESTIONS[i].ask = true;
+      return QUESTIONS[i];
+    }
+  }
 }
 
 function createQuestionPageData() {
   let pageObject = fetchPageData();
+  console.log(pageObject);
 }
+
 function renderQuestionPage() {
   $('main').on('click', '.js-generateQuestionButton', function() {
     //need to figure out how to get .submit() to work
@@ -128,6 +148,7 @@ function renderQuestionPage() {
     if (questionCount > 5) {
       renderEndPage();
     }
+    createQuestionPageData();
     //create new questionPageData
     //let questionPageData =
   });
