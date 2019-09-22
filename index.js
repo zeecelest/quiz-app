@@ -134,12 +134,12 @@ function fetchPageData() {
   }
 }
 
-function createQuestionPageData() {
-  let pageObject = fetchPageData();
-  let question = pageObject.question;
-  let answers = pageObject.answers;
-  let correctAnswer = pageObject.correct;
-}
+//function createQuestionPageData() {
+//let pageObject = fetchPageData();
+//let question = pageObject.question;
+//let answers = pageObject.answers;
+//let correctAnswer = pageObject.correct;
+//}
 
 function renderQuestionPage() {
   $('main').on('click', '.js-generateQuestionButton', function() {
@@ -150,13 +150,30 @@ function renderQuestionPage() {
     if (questionCount > 5) {
       renderEndPage();
     }
-    createQuestionPageData();
-    //create new questionPageData
-    //let questionPageData =
+    let pageObject = fetchPageData();
+    let question = pageObject.question;
+    let answers = pageObject.answers;
+    let correctAnswer = pageObject.correct;
+    $('main').html(
+      `<h1>${question}</h1>
+ <form class="js-quiz-questions" action="" method=""></form>
+<input type="radio" name="js-answer-options" id="answer-option-one">
+<label for = "answer-option-one">TEST</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-two">
+<label for = "answer-option-two">TESTing</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-three">
+<label for = "answer-option-three">TESTer</label>
+<br>
+<input type="radio" name="js-answer-options" id="answer-option-four">
+<label for = "answer-option-four">TESTingg</label>
+<br>
+ <button type="submit" class="js-submitAnswerButton">Roger, Ready to check asnwer</button>
+ </form>
+ <p class="questionCount">Question Number 1/5</p>`
+    );
   });
-
-  // generateQuestion();
-  // generateAnswers();
 }
 
 //renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
