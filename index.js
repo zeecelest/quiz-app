@@ -2,35 +2,30 @@
 //adding the quiz questions to our QUESTION bank.
 const QUESTIONS = [
   {
-    id: cuid(),
     question: 'What is the smallest planet in the Solar System?',
     answers: ['Mercury', 'Pluto', 'Jupiter', 'Mars'],
     correct: 'Mercury',
     ask: false
   },
   {
-    id: cuid(),
     question: 'What is the hottest planet in the Solar System?',
     answers: ['Mars', 'Venus', 'Sun', 'Saturn'],
     correct: 'Venus',
     ask: false
   },
   {
-    id: cuid(),
     question: 'What planet is closest in size to Earth?',
     answers: ['Uranus', 'Saturn', 'Venus', 'Jupiter'],
     correct: 'Venus',
     ask: false
   },
   {
-    id: cuid(),
     question: 'What is the brightest planet in the night sky?',
     answers: ['Venus', 'Earth', 'Saturn', 'Mars'],
     correct: 'Venus',
     ask: false
   },
   {
-    id: cuid(),
     question: 'What is the third planet from the Sun?',
     answers: ['Saturn', 'Earth', 'Pluto', 'Sun'],
     correct: 'Earth',
