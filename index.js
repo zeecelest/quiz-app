@@ -169,7 +169,7 @@ function renderQuestionPage() {
 <input type="radio" name="js-answer-options" id="answer-option-four">
 <label for = "answer-option-four">${answers[3]}</label>
 <br>
- <button type="submit" class="js-submitAnswerButton">Roger, Ready to check asnwer</button>
+ <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer</button>
  </form>
  <p class="questionCount">Question Number ${questionCount}/5</p>`
     );
