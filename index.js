@@ -143,17 +143,21 @@ function fetchPageData() {
 }
 
 function createQuestionPageData() {
-let pageObject = fetchPageData();
-//let discuss this, creating global variables may not be the best approach.
-question = pageObject.question;
-answers = pageObject.answers;
-correctAnswer = pageObject.correct;
+  let pageObject = fetchPageData();
+  //let discuss this, creating global variables may not be the best approach.
+  question = pageObject.question;
+  answers = pageObject.answers;
+  correctAnswer = pageObject.correct;
 }
 
 function renderQuestionPage() {
-  $('main').submit(function () {
+  $('main').submit(function() {
     event.preventDefault();
-    if ($('form').children('button').hasClass('js-generateQuestionButton')) {
+    if (
+      $('form')
+        .children('button')
+        .hasClass('js-generateQuestionButton')
+    ) {
       //$('main').on('click', '.js-generateQuestionButton', function() {
       //need to figure out how to get .submit() to work
       // event.preventDefault();
@@ -161,7 +165,8 @@ function renderQuestionPage() {
       questionCount += 1;
       if (questionCount > 5) {
         renderEndPage();
-      }else { // made this an else so that it would not try to run the below function after 5 questions
+      } else {
+        // made this an else so that it would not try to run the below function after 5 questions
         createQuestionPageData();
         //can add these back in if we do not want to create global variables
         // let pageObject = fetchPageData();
@@ -171,22 +176,31 @@ function renderQuestionPage() {
         $('main').html(
           `<h1>${question}</h1>
           <form class="js-quiz-questions" action="" method=""></form>
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${answers[0]}>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${
+              answers[0]
+            }>
             <label for = "answer-option-one">${answers[0]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${answers[1]}>
+            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${
+              answers[1]
+            }>
             <label for = "answer-option-two">${answers[1]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${answers[2]}>
+            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${
+              answers[2]
+            }>
             <label for = "answer-option-three">${answers[2]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${answers[3]}>
+            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${
+              answers[3]
+            }>
             <label for = "answer-option-four">${answers[3]}</label>
             <br>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer</button>
         </form>
         <p class="questionCount">Question Number ${questionCount}/5</p>`
-        );}
+        );
+      }
     }
   });
 }
@@ -199,7 +213,8 @@ function renderCorrectAnswerPage() {
   // $('main').submit(function () {
   // event.preventDefault();
   // if ($('form').children('button').hasClass('js-submitAnswerButton')) {
-  $('main').on('click', '.js-submitAnswerButton', function (event) { //why won't submit work here but it works above?
+  $('main').on('click', '.js-submitAnswerButton', function(event) {
+    //why won't submit work here but it works above?
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === correctAnswer) {
@@ -211,11 +226,12 @@ function renderCorrectAnswerPage() {
       <form>
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
       </form>
-      `);}
-    else {
+      `);
+    } else {
       renderWrongAnswerPage();
     }
-  });}
+  });
+}
 
 //renderWrongAnswerPage will listen for a submit action on the submitAnswerButton
 //similar to the renderCorrectAnswerPage function. The function will only run IF userAnswer!== correct answer.
@@ -230,7 +246,6 @@ function renderWrongAnswerPage() {
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>
       </form>
   `);
-  
 }
 
 //renderEndPage will listen for a submit event on Next Question button.
@@ -242,7 +257,13 @@ function renderWrongAnswerPage() {
 //question count > 5.
 // if we do this we need to remove renderEndPage() from handleNewPageLoad().
 function renderEndPage() {
-  console.log('renderEndPage works');
+  $('main').html(`
+  <h1>Mission Complete</h1>
+  <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
+  <p>You answered ${userScore}/5 questions correct!</p>
+  <form>
+  <button type="submit" class="js-ResetQuizButton">Retake Quiz?</button>
+  </form>`);
 }
 
 //renderNewQuiz listens for a button click on Retake quiz. If clicked it will call
@@ -261,7 +282,7 @@ function handleNewPageLoad() {
   renderQuestionPage();
   renderCorrectAnswerPage();
   //renderWrongAnswerPage();
-  renderEndPage();
+  //renderEndPage();
   renderNewQuiz();
 }
 
