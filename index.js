@@ -82,7 +82,9 @@ function renderStartPage() {
    <h1>Space Quiz!</h1>
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
+    <form>
     <button type="submit" class="js-generateQuestionButton">Launch</button>
+    </form>
    `);
 }
 
@@ -142,9 +144,12 @@ function fetchPageData() {
 //}
 
 function renderQuestionPage() {
-  $('main').on('click', '.js-generateQuestionButton', function() {
+$('main').submit(function(event){
+  event.preventDefault();
+   if ($('form').children('button').hasClass('js-generateQuestionButton')){
+  //$('main').on('click', '.js-generateQuestionButton', function() {
     //need to figure out how to get .submit() to work
-    event.preventDefault();
+    // event.preventDefault();
     console.log('renderQuestion page works');
     questionCount += 1;
     if (questionCount > 5) {
@@ -173,7 +178,7 @@ function renderQuestionPage() {
  </form>
  <p class="questionCount">Question Number ${questionCount}/5</p>`
     );
-  });
+  }});
 }
 
 //renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
