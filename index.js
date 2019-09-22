@@ -1,5 +1,5 @@
 'use strict';
-//adding the quiz questions
+//adding the quiz questions to our QUESTION bank.
 const QUESTIONS = [
   {
     id: cuid(),
@@ -39,10 +39,8 @@ const QUESTIONS = [
 ];
 
 /* initializing userScore and questionNumber to be 0 so that 
-we can userScore++ and questionNumber++ as our app runs.
-Also, may not be the right approach. but allowing for global variables
-that will represent the current question, set of answers, and correct answer
-for the page that we are on. this way we can access the data across the app.
+we can userScore++ and questionNumber++ as our app runs. Setting Global Variables
+for question, answers, and correctAnswers to access throughout the app. 
 */
 
 let userScore = 0;
@@ -51,9 +49,12 @@ let question;
 let answers;
 let correctAnswer;
 
-//if the user presses the Retake Quiz Button, these functions will
-//be called within the renderStartPage to set the UserScore back to 0.
-// and to set the questionCount back to 0.
+/*if the user presses the Retake Quiz Button, these functions will
+be called within the renderStartPage to set the UserScore back to 0.
+and to set the questionCount back to 0 and will reset the Question bank so
+that the questions will all be asked again. 
+*/
+
 function resetUserScore() {
   userScore = 0;
   console.log('resetuserScore is working');
@@ -73,11 +74,9 @@ function resetQuestionAsked() {
 
 /*renderStartPage should run automatically when the page is loaded.
 It will use the .html() method to push a string of html content to 
-the <main> section in the html. This will allow for the start page
-to be displayed by the user. It should not contain any score values 
-and should reset the question count. Of note, this function will also
+the <main> section in the html. Of note, this function will also
 be called by the renderNewGame function when the user hits the "restart 
-quiz button"*/
+quiz button" */
 
 function renderStartPage() {
   console.log('renderStartPage works');
@@ -94,44 +93,9 @@ function renderStartPage() {
     `);
 }
 
-// generateQuestion will be called by renderQuestion page (which is listening for submit events on
-// start Quiz or Next Question buttons.
-// we will possibly use a .forEach loop to go through the
-// array of objects of our QUESTIONS bank.
-// we will then return at string that will be our question.
-//we will need to figure out how to loop through the bank and retrieve
-//a question without the questions getting repeated.
-//maybe useing .pop() to remove it from the array completely?
-//however, we would need to be able to re-cycle through the questions
-//when retake quiz is pressed. So permanentely changing the QUESTION bank
-//probably would not work.
-//maybe we can give each queston a property of "asked" and can be initally set to false.
-// The generate question function can only pull questions marked as false.
-// if the question is asked it can set the asked value to true.
-// renderStartPage could then also reset all property values of asked to false?
-// if we did this approach we would need a function for resetQuestionBank that will be called
-// by renderStartPage.
-
-function generateQuestion() {
-  console.log('generateQuestion works');
-}
-
-//this function will sort through our QUESTIONS bank array of objects.
-//It will return an array of answers that we will use with our renderQuestionPage.
-//Again, need to work with the generateQuestion function to make sure we are not repeating questions/answers.
-//potentially we can combine into one function with generateQuestion? Or this can be called by generateQuestion?
-function generateAnswers() {
-  console.log('generateAnswers works');
-}
-/* renderQuestionPage will listen for a submit event on the start quiz button or on the
-next question button. It will push a text string into the main section of the html document
-using the .html() method to render the content for the question page. 
+/* fetchPageData will generate an objet that we will use to get the data for 
+renderQuestionPage.
 */
-
-//also thought-- maybe we have an if statement that
-//if questionCount > 5 then we run the render End Page function.
-// if we approach it this way we would need to remove
-//renderEndPage() from handleNewPageLoad();
 
 function fetchPageData() {
   for (let i = 0; i < QUESTIONS.length; i++) {
@@ -142,15 +106,21 @@ function fetchPageData() {
   }
 }
 
+/* createQuestionPageData will alter the global variables
+to allow us to access the question, answers, and correctAnswer
+for the question that we are on */
+
 function createQuestionPageData() {
   let pageObject = fetchPageData();
-  //let discuss this, creating global variables may not be the best approach.
   question = pageObject.question;
   answers = pageObject.answers;
   correctAnswer = pageObject.correct;
 }
 
-function renderQuestionPage() {
+/*this function decides if a new question should be loaded OR if the renderEndPage should be loaded.
+*/
+
+function nextButtonAction(){
   $('main').submit(function() {
     event.preventDefault();
     if (
@@ -158,52 +128,45 @@ function renderQuestionPage() {
         .children('button')
         .hasClass('js-generateQuestionButton')
     ) {
-      //$('main').on('click', '.js-generateQuestionButton', function() {
-      //need to figure out how to get .submit() to work
-      // event.preventDefault();
-      console.log('renderQuestion page works');
       questionCount += 1;
       if (questionCount > 5) {
         renderEndPage();
       } else {
-        // made this an else so that it would not try to run the below function after 5 questions
-        createQuestionPageData();
-        //can add these back in if we do not want to create global variables
-        // let pageObject = fetchPageData();
-        // let question = pageObject.question;
-        // let answers = pageObject.answers;
-        // let correctAnswer = pageObject.correct;
-        $('main').html(
-          `<h1>${question}</h1>
+        renderQuestionPage();
+      }
+    }});}
+
+
+/* renderQuestionPage will listen for a submit event on the start quiz button or on the
+next question button. It will push a text string into the main section of the html document
+using the .html() method to render the content for the question page. 
+*/
+
+function renderQuestionPage() {
+  createQuestionPageData();
+  $('main').html(
+    `<h1>${question}</h1>
           <form class="js-quiz-questions" action="" method=""></form>
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${
-              answers[0]
-            }>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${answers[0]}>
             <label for = "answer-option-one">${answers[0]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${
-              answers[1]
-            }>
+            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${answers[1]}>
             <label for = "answer-option-two">${answers[1]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${
-              answers[2]
-            }>
+            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${answers[2]}>
             <label for = "answer-option-three">${answers[2]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${
-              answers[3]
-            }>
+            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${answers[3]}>
             <label for = "answer-option-four">${answers[3]}</label>
             <br>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
         <p class="questionCount">Question Number: ${questionCount}/5</p>`
-        );
-      }
-    }
-  });
+  );
 }
+//     }
+//   });
+// }
 
 //renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
 // However it will only run if the userAnswer === correct answer in the question bank
@@ -290,11 +253,12 @@ such as renderStartPage. OR they are the functions that are assigning listeners
 
 function handleNewPageLoad() {
   renderStartPage();
-  renderQuestionPage();
+  //renderQuestionPage();
   renderCorrectAnswerPage();
   //renderWrongAnswerPage();
   //renderEndPage();
   renderNewQuiz();
+  nextButtonAction();
 }
 
 $(handleNewPageLoad);
