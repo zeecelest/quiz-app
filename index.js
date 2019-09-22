@@ -158,20 +158,20 @@ function renderQuestionPage() {
       `<h1>${question}</h1>
  <form class="js-quiz-questions" action="" method=""></form>
 <input type="radio" name="js-answer-options" id="answer-option-one">
-<label for = "answer-option-one">TEST</label>
+<label for = "answer-option-one">${answers[0]}</label>
 <br>
 <input type="radio" name="js-answer-options" id="answer-option-two">
-<label for = "answer-option-two">TESTing</label>
+<label for = "answer-option-two">${answers[1]}</label>
 <br>
 <input type="radio" name="js-answer-options" id="answer-option-three">
-<label for = "answer-option-three">TESTer</label>
+<label for = "answer-option-three">${answers[2]}</label>
 <br>
 <input type="radio" name="js-answer-options" id="answer-option-four">
-<label for = "answer-option-four">TESTingg</label>
+<label for = "answer-option-four">${answers[3]}</label>
 <br>
  <button type="submit" class="js-submitAnswerButton">Roger, Ready to check asnwer</button>
  </form>
- <p class="questionCount">Question Number 1/5</p>`
+ <p class="questionCount">Question Number ${questionCount}/5</p>`
     );
   });
 }
