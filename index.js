@@ -210,7 +210,7 @@ function renderCorrectAnswerPage() {
       `);}
       // else {
       //   renderWrongAnswerPage();
-      }
+      // }
     });}
 
 //renderWrongAnswerPage will listen for a submit action on the submitAnswerButton
