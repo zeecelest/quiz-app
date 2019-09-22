@@ -164,24 +164,28 @@ function renderQuestionPage() {
         <p class="questionCount">Question Number: ${questionCount}/5</p>`
   );
 }
-//     }
-//   });
-// }
 
-//renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
-// However it will only run if the userAnswer === correct answer in the question bank
-//we will need a way to retrieve the user's Answer and compare it to the correct answer for
-// the question we have asked.
-function renderCorrectAnswerPage() {
-  // $('main').submit(function () {
-  // event.preventDefault();
-  // if ($('form').children('button').hasClass('js-submitAnswerButton')) {
+/* this will listen for an event when the user submits their answer.
+it will check to see if their answer is correct. It will send 
+either to the correct answer page or wrong answer page 
+depending on if the user was right or not. */
+
+function checkUserAnswer(){
   $('main').on('click', '.js-submitAnswerButton', function(event) {
-    //why won't submit work here but it works above?
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === correctAnswer) {
-      console.log('renderCorrectAnswerPage works');
+      renderCorrectAnswerPage();
+    }else {
+      renderWrongAnswerPage();
+    }
+  });}
+
+/*renderCorrectAnswerPage will be called if the user got the answer right.
+it will use the .html method to push in the html to the main Element.
+*/
+
+function renderCorrectAnswerPage() {
       userScore += 1;
       $('main').html(`
       <h1>You Got The Answer Right!</h1>
@@ -190,15 +194,12 @@ function renderCorrectAnswerPage() {
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
       </form>
       `);
-    } else {
-      renderWrongAnswerPage();
-    }
-  });
 }
 
-//renderWrongAnswerPage will listen for a submit action on the submitAnswerButton
-//similar to the renderCorrectAnswerPage function. The function will only run IF userAnswer!== correct answer.
-//we will use $('main').html('') to push in our html to render the wrong Answer page.
+
+/*renderWrongAnswerPage will be called by checkUserAnswer if the user got the question wrong. 
+It will use .html method to push into the main element of the html.
+*/
 function renderWrongAnswerPage() {
   console.log('renderWrongAnswer Page works');
   $('main').html(`
@@ -211,14 +212,10 @@ function renderWrongAnswerPage() {
   `);
 }
 
-//renderEndPage will listen for a submit event on Next Question button.
-// if question count is >5 then renderEndPage will use the .html method to push
-// in the html to our main element to render the End Page.
-// Also within this function, we will need to utilitize the value for user score
-// that we have been adding to in the renderCorrectAnswerPage();
-// ALTERNITAVELY-- renderEndPage can be called by renderQuestionPage if the
-//question count > 5.
-// if we do this we need to remove renderEndPage() from handleNewPageLoad().
+/*renderEndPage will be called by nextButtonAction if the question count > 5.
+it uses .html method to push into the main element.
+*/
+
 function renderEndPage() {
   $('main').html(`
   <h1>Mission Complete</h1>
@@ -232,33 +229,24 @@ function renderEndPage() {
 
 //renderNewQuiz listens for a button click on Retake quiz. If clicked it will call
 // the renderStartPage function.
+
 function renderNewQuiz() {
   $('main').on('click', '.js-ResetQuizButton', function() {
-    //$('main').submit(function(event) {
     event.preventDefault();
-    //if (
-    //$('form')
-    //.children('button')
-    //.hasClass('js-ResetQuizButton')
-    //) {
     renderStartPage();
   });
-  //log('renderNewQuiz is working');
 }
 
-/*the functions within hadleNewPageLoad() are all of the base functions that we need
+/*the functions within handleNewPageLoad() are all of the base functions that we need
 to run when the page is ready. These are the functions that either need to run automatically
 such as renderStartPage. OR they are the functions that are assigning listeners
 */
 
 function handleNewPageLoad() {
   renderStartPage();
-  //renderQuestionPage();
-  renderCorrectAnswerPage();
-  //renderWrongAnswerPage();
-  //renderEndPage();
   renderNewQuiz();
   nextButtonAction();
+  checkUserAnswer();
 }
 
 $(handleNewPageLoad);
