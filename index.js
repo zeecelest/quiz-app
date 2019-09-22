@@ -196,9 +196,9 @@ function renderQuestionPage() {
             }>
             <label for = "answer-option-four">${answers[3]}</label>
             <br>
-            <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer</button>
+            <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
-        <p class="questionCount">Question Number ${questionCount}/5</p>`
+        <p class="questionCount">Question Number: ${questionCount}/5</p>`
         );
       }
     }
@@ -262,7 +262,7 @@ function renderEndPage() {
   <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
   <p>You answered ${userScore}/5 questions correct!</p>
   <form>
-  <button type="submit" class="js-ResetQuizButton">Retake Quiz?</button>
+  <button type="submit" class="js-ResetQuizButton">Repeat Mission?</button>
   </form>`);
 }
 
