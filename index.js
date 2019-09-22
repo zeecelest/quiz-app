@@ -25,7 +25,7 @@ const QUESTIONS = [
   {
     id: cuid(),
     question: 'What is the brightest planet in the night sky?',
-    answer: ['Venus', 'Earth', 'Saturn', 'Mars'],
+    answers: ['Venus', 'Earth', 'Saturn', 'Mars'],
     correct: 'Venus',
     ask: false
   },
@@ -40,10 +40,16 @@ const QUESTIONS = [
 
 /* initializing userScore and questionNumber to be 0 so that 
 we can userScore++ and questionNumber++ as our app runs.
+Also, may not be the right approach. but allowing for global variables
+that will represent the current question, set of answers, and correct answer
+for the page that we are on. this way we can access the data across the app.
 */
 
 let userScore = 0;
 let questionCount = 0;
+let question;
+let answers;
+let correctAnswer;
 
 //if the user presses the Retake Quiz Button, these functions will
 //be called within the renderStartPage to set the UserScore back to 0.
@@ -136,49 +142,52 @@ function fetchPageData() {
   }
 }
 
-//function createQuestionPageData() {
-//let pageObject = fetchPageData();
-//let question = pageObject.question;
-//let answers = pageObject.answers;
-//let correctAnswer = pageObject.correct;
-//}
+function createQuestionPageData() {
+let pageObject = fetchPageData();
+question = pageObject.question;
+answers = pageObject.answers;
+correctAnswer = pageObject.correct;
+}
 
 function renderQuestionPage() {
-$('main').submit(function(event){
-  event.preventDefault();
-   if ($('form').children('button').hasClass('js-generateQuestionButton')){
-  //$('main').on('click', '.js-generateQuestionButton', function() {
-    //need to figure out how to get .submit() to work
-    // event.preventDefault();
-    console.log('renderQuestion page works');
-    questionCount += 1;
-    if (questionCount > 5) {
-      renderEndPage();
-    }
-    let pageObject = fetchPageData();
-    let question = pageObject.question;
-    let answers = pageObject.answers;
-    let correctAnswer = pageObject.correct;
-    $('main').html(
-      `<h1>${question}</h1>
+  $('main').submit(function () {
+    event.preventDefault();
+    if ($('form').children('button').hasClass('js-generateQuestionButton')) {
+      //$('main').on('click', '.js-generateQuestionButton', function() {
+      //need to figure out how to get .submit() to work
+      // event.preventDefault();
+      console.log('renderQuestion page works');
+      questionCount += 1;
+      if (questionCount > 5) {
+        renderEndPage();
+      }else { // made this an else so that it would not try to run the below function after 5 questions
+      createQuestionPageData();
+      //can add these back in if we do not want to create global variables
+      // let pageObject = fetchPageData();
+      // let question = pageObject.question;
+      // let answers = pageObject.answers;
+      // let correctAnswer = pageObject.correct;
+      $('main').html(
+        `<h1>${question}</h1>
  <form class="js-quiz-questions" action="" method=""></form>
-<input type="radio" name="js-answer-options" id="answer-option-one">
+<input type="radio" name="js-answer-options" id="answer-option-one" value= ${answers[0]}>
 <label for = "answer-option-one">${answers[0]}</label>
 <br>
-<input type="radio" name="js-answer-options" id="answer-option-two">
+<input type="radio" name="js-answer-options" id="answer-option-two" value= ${answers[1]}>
 <label for = "answer-option-two">${answers[1]}</label>
 <br>
-<input type="radio" name="js-answer-options" id="answer-option-three">
+<input type="radio" name="js-answer-options" id="answer-option-three" value= ${answers[2]}>
 <label for = "answer-option-three">${answers[2]}</label>
 <br>
-<input type="radio" name="js-answer-options" id="answer-option-four">
+<input type="radio" name="js-answer-options" id="answer-option-four" value= ${answers[3]}>
 <label for = "answer-option-four">${answers[3]}</label>
 <br>
  <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer</button>
  </form>
  <p class="questionCount">Question Number ${questionCount}/5</p>`
-    );
-  }});
+      );}
+    }
+  });
 }
 
 //renderCorrectAnswerPage will listen for a submit action on the submitAnswerButton
@@ -186,9 +195,23 @@ $('main').submit(function(event){
 //we will need a way to retrieve the user's Answer and compare it to the correct answer for
 // the question we have asked.
 function renderCorrectAnswerPage() {
-  console.log('renderCorrectAnswerPage works');
-  // userScore += 1;
-}
+  $('main').on('click', '.js-submitAnswerButton', function (event) { //why won't submit work here but it works above?
+    event.preventDefault();
+    let userSelected = $('input:checked').val();
+    if (userSelected === correctAnswer) {
+      console.log('renderCorrectAnswerPage works');
+      userScore += 1;
+      $('main').html(`
+      <h1>You Got The Answer Right!</h1>
+      <img src = "https://i.dailymail.co.uk/i/newpix/2018/02/23/12/4983FD9D00000578-5426527-image-a-41_1519387515971.jpg" alt= "Two Thumbs Up From An Astronaut">
+      <form>
+      <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
+      </form>
+      `);}
+      // else {
+      //   renderWrongAnswerPage();
+      }
+    });}
 
 //renderWrongAnswerPage will listen for a submit action on the submitAnswerButton
 //similar to the renderCorrectAnswerPage function. The function will only run IF userAnswer!== correct answer.
