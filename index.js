@@ -269,7 +269,17 @@ function renderEndPage() {
 //renderNewQuiz listens for a button click on Retake quiz. If clicked it will call
 // the renderStartPage function.
 function renderNewQuiz() {
-  console.log('renderNewQuiz is working');
+  $('main').on('click', '.js-ResetQuizButton', function() {
+    //$('main').submit(function(event) {
+    event.preventDefault();
+    //if (
+    //$('form')
+    //.children('button')
+    //.hasClass('js-ResetQuizButton')
+    //) {
+    renderStartPage();
+  });
+  //log('renderNewQuiz is working');
 }
 
 /*the functions within hadleNewPageLoad() are all of the base functions that we need
