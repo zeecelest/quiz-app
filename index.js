@@ -38,11 +38,19 @@ we can userScore++ and questionNumber++ as our app runs. Setting Global Variable
 for question, answers, and correctAnswers to access throughout the app. 
 */
 
+// const pageObject {
+//   userScore: 0,
+//   questionCount: 0,
+//   question:
+//   answers:
+//   correctAnswer:
+// }
 let userScore = 0;
 let questionCount = 0;
 let question;
 let answers;
 let correctAnswer;
+
 
 /*if the user presses the Retake Quiz Button, these functions will
 be called within the renderStartPage to set the UserScore back to 0.
@@ -82,7 +90,7 @@ function renderStartPage() {
     <h1>Space Quiz!</h1>
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
-    <form>
+    <form class = "js-launchPage">
     <button type="submit" class="js-generateQuestionButton">Launch</button>
     </form>
     `);
@@ -123,6 +131,7 @@ function nextButtonAction(){
         .children('button')
         .hasClass('js-generateQuestionButton')
     ) {
+      console.log('launch button clicked');
       questionCount += 1;
       if (questionCount > 5) {
         renderEndPage();
@@ -164,6 +173,32 @@ function renderQuestionPage() {
 it will check to see if their answer is correct. It will send 
 either to the correct answer page or wrong answer page 
 depending on if the user was right or not. */
+
+// $('main').submit(function() {
+//   event.preventDefault();
+//   if (
+//     $('form')
+//       .children('button')
+//       .hasClass('js-generateQuestionButton')
+
+
+// function checkUserAnswer(){
+  // $('main').submit(function(){
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  // if ($('form.js-quiz-questions').children('button').hasClass('js-submitAnswerButton')) {
+  //   console.log('submitAnswerButton clicked');
+  //   event.stopPropagation();
+  //   let userSelected = $('input:checked').val();
+  //   if (userSelected === correctAnswer) {
+  //     renderCorrectAnswerPage();
+  //   }else {
+  //     renderWrongAnswerPage();
+  // }}});}
+
+
+
+
 
 function checkUserAnswer(){
   $('main').on('click', '.js-submitAnswerButton', function(event) {
