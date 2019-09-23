@@ -221,7 +221,7 @@ function renderEndPage() {
   $('main').html(`
   <h1>Mission Complete</h1>
   <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
-  <p>You answered ${pageObject.userScore}/5 questions correct!</p>
+  <p>You answered ${pageObject.userScore} out of 5 questions correct!</p>
   <form class= "js-resetNewQuiz">
   <button type="submit" class="js-ResetQuizButton">Repeat Mission?
   </button>
