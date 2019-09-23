@@ -136,7 +136,9 @@ function renderQuestionPage() {
   $('main').html(
     `<h1>${pageObject.question}</h1>
           <form class="js-quiz-questions" action="" method="">
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]}>
+          <fieldset name= "selectAnAnswer">
+          <legend> Select An Answer </legend>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]} required>
             <label for = "answer-option-one">${pageObject.answers[0]}</label>
             <br>
             <input type="radio" name="js-answer-options" id="answer-option-two" value= ${pageObject.answers[1]}>
@@ -147,6 +149,7 @@ function renderQuestionPage() {
             <br>
             <input type="radio" name="js-answer-options" id="answer-option-four" value= ${pageObject.answers[3]}>
             <label for = "answer-option-four">${pageObject.answers[3]}</label>
+          </fieldset>
             <br>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
@@ -160,7 +163,7 @@ either to the correct answer page or wrong answer page
 depending on if the user was right or not. */
 
 function checkUserAnswer() {
-  $('main').on('submit', '.js-quiz-questions', function () {  
+  $('main').on('submit', '.js-quiz-questions', function () {
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === pageObject.correctAnswer) {
