@@ -90,7 +90,7 @@ function renderStartPage() {
     <h1>Space Quiz!</h1>
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
-    <form class = "js-launchPage">
+    <form class = "js-launchNextQuestion">
     <button type="submit" class="js-generateQuestionButton">Launch</button>
     </form>
     `);
@@ -123,22 +123,17 @@ function createQuestionPageData() {
 /*this function decides if a new question should be loaded OR if the renderEndPage should be loaded.
 */
 
-function nextButtonAction(){
-  $('main').submit(function() {
+function nextButtonAction() {
+  $('main').on('submit', '.js-launchNextQuestion', function () {
     event.preventDefault();
-    if (
-      $('form')
-        .children('button')
-        .hasClass('js-generateQuestionButton')
-    ) {
-      console.log('launch button clicked');
-      questionCount += 1;
-      if (questionCount > 5) {
-        renderEndPage();
-      } else {
-        renderQuestionPage();
-      }
-    }});}
+    questionCount += 1;
+    if (questionCount > 5) {
+      renderEndPage();
+    } else {
+      renderQuestionPage();
+    }
+  });
+}
 
 
 /* renderQuestionPage will listen for a submit event on the start quiz button or on the
@@ -150,7 +145,7 @@ function renderQuestionPage() {
   createQuestionPageData();
   $('main').html(
     `<h1>${question}</h1>
-          <form class="js-quiz-questions" action="" method=""></form>
+          <form class="js-quiz-questions" action="" method="">
             <input type="radio" name="js-answer-options" id="answer-option-one" value= ${answers[0]}>
             <label for = "answer-option-one">${answers[0]}</label>
             <br>
@@ -174,53 +169,28 @@ it will check to see if their answer is correct. It will send
 either to the correct answer page or wrong answer page 
 depending on if the user was right or not. */
 
-// $('main').submit(function() {
-//   event.preventDefault();
-//   if (
-//     $('form')
-//       .children('button')
-//       .hasClass('js-generateQuestionButton')
-
-
-// function checkUserAnswer(){
-  // $('main').submit(function(){
-  //   event.stopPropagation();
-  //   event.preventDefault();
-  // if ($('form.js-quiz-questions').children('button').hasClass('js-submitAnswerButton')) {
-  //   console.log('submitAnswerButton clicked');
-  //   event.stopPropagation();
-  //   let userSelected = $('input:checked').val();
-  //   if (userSelected === correctAnswer) {
-  //     renderCorrectAnswerPage();
-  //   }else {
-  //     renderWrongAnswerPage();
-  // }}});}
-
-
-
-
-
-function checkUserAnswer(){
-  $('main').on('click', '.js-submitAnswerButton', function(event) {
+function checkUserAnswer() {
+  $('main').on('submit', '.js-quiz-questions', function () {  
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === correctAnswer) {
       renderCorrectAnswerPage();
-    }else {
+    } else {
       renderWrongAnswerPage();
     }
-  });}
+  });
+}
 
 /*renderCorrectAnswerPage will be called if the user got the answer right.
 it will use the .html method to push in the html to the main Element.
 */
 
 function renderCorrectAnswerPage() {
-      userScore += 1;
-      $('main').html(`
+  userScore += 1;
+  $('main').html(`
       <h1>You Got The Answer Right!</h1>
       <img src = "https://i.dailymail.co.uk/i/newpix/2018/02/23/12/4983FD9D00000578-5426527-image-a-41_1519387515971.jpg" alt= "Two Thumbs Up From An Astronaut">
-      <form>
+      <form class= "js-launchNextQuestion">
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
       </form>
       `);
@@ -236,7 +206,7 @@ function renderWrongAnswerPage() {
       <h1> Houston, we have a problem!</h1>
       <img src = "http://cdn9.dissolve.com/p/D84_99_007/D84_99_007_0004_600.jpg" alt= "Sad Astronaut sits on a bench" >
       <p>You got the answer wrong. The correct answer was ${correctAnswer}. </p>
-      <form>
+      <form class= js-launchNextQuestion>
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>
       </form>
   `);
@@ -251,7 +221,7 @@ function renderEndPage() {
   <h1>Mission Complete</h1>
   <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
   <p>You answered ${userScore}/5 questions correct!</p>
-  <form>
+  <form class= "js-resetNewQuiz">
   <button type="submit" class="js-ResetQuizButton">Repeat Mission?
   </button>
   </form>`);
@@ -261,7 +231,7 @@ function renderEndPage() {
 // the renderStartPage function.
 
 function renderNewQuiz() {
-  $('main').on('click', '.js-ResetQuizButton', function() {
+  $('main').on('submit', '.js-newQuiz', function () {
     event.preventDefault();
     renderStartPage();
   });
