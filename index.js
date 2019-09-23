@@ -38,19 +38,13 @@ we can userScore++ and questionNumber++ as our app runs. Setting Global Variable
 for question, answers, and correctAnswers to access throughout the app. 
 */
 
-// const pageObject {
-//   userScore: 0,
-//   questionCount: 0,
-//   question:
-//   answers:
-//   correctAnswer:
-// }
-let userScore = 0;
-let questionCount = 0;
-let question;
-let answers;
-let correctAnswer;
-
+const pageObject = {
+  userScore: 0,
+  questionCount: 0,
+  question: '',
+  answers: '',
+  correctAnswer: '',
+};
 
 /*if the user presses the Retake Quiz Button, these functions will
 be called within the renderStartPage to set the UserScore back to 0.
@@ -59,19 +53,16 @@ that the questions will all be asked again.
 */
 
 function resetUserScore() {
-  userScore = 0;
-  console.log('resetuserScore is working');
+  pageObject.userScore = 0;
 }
 
 function resetQuestionCount() {
-  questionCount = 0;
-  console.log('resetQuestionCount is working');
+  pageObject.questionCount = 0;
 }
 
 function resetQuestionAsked() {
   for (let i = 0; i < QUESTIONS.length; i++) {
     QUESTIONS[i].ask = false;
-    //console.log(QUESTIONS[i]);
   }
 }
 
@@ -82,7 +73,6 @@ be called by the renderNewGame function when the user hits the "restart
 quiz button" */
 
 function renderStartPage() {
-  console.log('renderStartPage works');
   resetUserScore();
   resetQuestionCount();
   resetQuestionAsked();
@@ -114,10 +104,10 @@ to allow us to access the question, answers, and correctAnswer
 for the question that we are on */
 
 function createQuestionPageData() {
-  let pageObject = fetchPageData();
-  question = pageObject.question;
-  answers = pageObject.answers;
-  correctAnswer = pageObject.correct;
+  let currentQuestionData = fetchPageData();
+  pageObject.question = currentQuestionData.question;
+  pageObject.answers = currentQuestionData.answers;
+  pageObject.correctAnswer = currentQuestionData.correct;
 }
 
 /*this function decides if a new question should be loaded OR if the renderEndPage should be loaded.
@@ -126,8 +116,8 @@ function createQuestionPageData() {
 function nextButtonAction() {
   $('main').on('submit', '.js-launchNextQuestion', function () {
     event.preventDefault();
-    questionCount += 1;
-    if (questionCount > 5) {
+    pageObject.questionCount += 1;
+    if (pageObject.questionCount > 5) {
       renderEndPage();
     } else {
       renderQuestionPage();
@@ -144,23 +134,23 @@ using the .html() method to render the content for the question page.
 function renderQuestionPage() {
   createQuestionPageData();
   $('main').html(
-    `<h1>${question}</h1>
+    `<h1>${pageObject.question}</h1>
           <form class="js-quiz-questions" action="" method="">
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${answers[0]}>
-            <label for = "answer-option-one">${answers[0]}</label>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]}>
+            <label for = "answer-option-one">${pageObject.answers[0]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${answers[1]}>
-            <label for = "answer-option-two">${answers[1]}</label>
+            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${pageObject.answers[1]}>
+            <label for = "answer-option-two">${pageObject.answers[1]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${answers[2]}>
-            <label for = "answer-option-three">${answers[2]}</label>
+            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${pageObject.answers[2]}>
+            <label for = "answer-option-three">${pageObject.answers[2]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${answers[3]}>
-            <label for = "answer-option-four">${answers[3]}</label>
+            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${pageObject.answers[3]}>
+            <label for = "answer-option-four">${pageObject.answers[3]}</label>
             <br>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
-        <p class="questionCount">Question Number: ${questionCount}/5</p>`
+        <p class="questionCount">Question Number: ${pageObject.questionCount}/5</p>`
   );
 }
 
@@ -173,7 +163,7 @@ function checkUserAnswer() {
   $('main').on('submit', '.js-quiz-questions', function () {  
     event.preventDefault();
     let userSelected = $('input:checked').val();
-    if (userSelected === correctAnswer) {
+    if (userSelected === pageObject.correctAnswer) {
       renderCorrectAnswerPage();
     } else {
       renderWrongAnswerPage();
@@ -186,7 +176,7 @@ it will use the .html method to push in the html to the main Element.
 */
 
 function renderCorrectAnswerPage() {
-  userScore += 1;
+  pageObject.userScore += 1;
   $('main').html(`
       <h1>You Got The Answer Right!</h1>
       <img src = "https://i.dailymail.co.uk/i/newpix/2018/02/23/12/4983FD9D00000578-5426527-image-a-41_1519387515971.jpg" alt= "Two Thumbs Up From An Astronaut">
@@ -201,11 +191,10 @@ function renderCorrectAnswerPage() {
 It will use .html method to push into the main element of the html.
 */
 function renderWrongAnswerPage() {
-  console.log('renderWrongAnswer Page works');
   $('main').html(`
       <h1> Houston, we have a problem!</h1>
       <img src = "http://cdn9.dissolve.com/p/D84_99_007/D84_99_007_0004_600.jpg" alt= "Sad Astronaut sits on a bench" >
-      <p>You got the answer wrong. The correct answer was ${correctAnswer}. </p>
+      <p>You got the answer wrong. The correct answer was ${pageObject.correctAnswer}. </p>
       <form class= js-launchNextQuestion>
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>
       </form>
@@ -220,7 +209,7 @@ function renderEndPage() {
   $('main').html(`
   <h1>Mission Complete</h1>
   <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
-  <p>You answered ${userScore}/5 questions correct!</p>
+  <p>You answered ${pageObject.userScore}/5 questions correct!</p>
   <form class= "js-resetNewQuiz">
   <button type="submit" class="js-ResetQuizButton">Repeat Mission?
   </button>
