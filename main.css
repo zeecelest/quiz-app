@@ -3,15 +3,19 @@
 }
 
 body {
-  background-color: black;
+  background-image: url('https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fstartswithabang%2Ffiles%2F2016%2F02%2Fmess-1200x965.jpg');
+  background-size: cover;
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 main {
   border-radius: 3px;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(60, 60, 60, 0.7);
+  color: cornsilk;
   width: 90%;
   position: relative;
   top: 50px;
@@ -20,17 +24,20 @@ main {
   justify-content: center;
   align-items: center;
   font-family: 'Space Mono', monospace;
+  border: 3px dashed #006c89;
 }
 
 img {
   width: 70%;
   border-radius: 3px;
+  text-shadow: 1px 1px 1px white;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 35px;
-  font-weight: bolder;
-  text-decoration: underline;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -40,16 +47,42 @@ p {
 }
 
 button {
+  width: 100%;
+  margin-left: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
   font-family: 'Space Mono', monospace;
-  background-color: lightblue;
+  font-weight: bolder;
+  color: cornsilk;
+  background-color: transparent;
+  border: 2px solid #006c89;
+}
+
+button:hover {
+  background-color: #ca5d00;
+  border: 2px solid #ca5d00;
 }
 
 form {
-  /* display: flex;
-  align-items: flex-start;
-  flex-direction: column; */
-  /* text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center; */
+  justify-content: space-around;
+  width: 60%;
+}
+
+fieldset {
+  border: 1px solid #006c89;
+}
+
+.questionCount {
+  font-size: 15px;
+  color: #ca5d00;
+}
+
+@media screen and (min-width: 400px) {
+  main {
+    width: 50%;
+    height: 600px;
+  }
 }

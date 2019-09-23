@@ -81,7 +81,7 @@ function renderStartPage() {
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
     <form class = "js-launchNextQuestion">
-    <button type="submit" class="js-generateQuestionButton">Launch</button>
+    <button type="submit" class="js-generateQuestionButton">LAUNCH</button>
     </form>
     `);
 }
@@ -136,7 +136,9 @@ function renderQuestionPage() {
   $('main').html(
     `<h1>${pageObject.question}</h1>
           <form class="js-quiz-questions" action="" method="">
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]}>
+          <fieldset name= "selectAnAnswer">
+          <legend> Select An Answer </legend>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]} required>
             <label for = "answer-option-one">${pageObject.answers[0]}</label>
             <br>
             <input type="radio" name="js-answer-options" id="answer-option-two" value= ${pageObject.answers[1]}>
@@ -147,6 +149,7 @@ function renderQuestionPage() {
             <br>
             <input type="radio" name="js-answer-options" id="answer-option-four" value= ${pageObject.answers[3]}>
             <label for = "answer-option-four">${pageObject.answers[3]}</label>
+          </fieldset>
             <br>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
@@ -160,7 +163,7 @@ either to the correct answer page or wrong answer page
 depending on if the user was right or not. */
 
 function checkUserAnswer() {
-  $('main').on('submit', '.js-quiz-questions', function () {  
+  $('main').on('submit', '.js-quiz-questions', function () {
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === pageObject.correctAnswer) {
@@ -178,9 +181,10 @@ it will use the .html method to push in the html to the main Element.
 function renderCorrectAnswerPage() {
   pageObject.userScore += 1;
   $('main').html(`
-      <h1>You Got The Answer Right!</h1>
+      <h1>Stellar Job!</h1>
       <img src = "https://i.dailymail.co.uk/i/newpix/2018/02/23/12/4983FD9D00000578-5426527-image-a-41_1519387515971.jpg" alt= "Two Thumbs Up From An Astronaut">
       <form class= "js-launchNextQuestion">
+      <p>You got the answer right!</p>
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
       </form>
       `);
