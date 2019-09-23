@@ -81,7 +81,7 @@ function renderStartPage() {
     <img src= "https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg" alt="photo of solar system">
     <p>What do you know about space?</p>
     <form class = "js-launchNextQuestion">
-    <button type="submit" class="js-generateQuestionButton">Launch</button>
+    <button type="submit" class="js-generateQuestionButton">LAUNCH</button>
     </form>
     `);
 }
@@ -181,9 +181,10 @@ it will use the .html method to push in the html to the main Element.
 function renderCorrectAnswerPage() {
   pageObject.userScore += 1;
   $('main').html(`
-      <h1>You Got The Answer Right!</h1>
+      <h1>Stellar Job!</h1>
       <img src = "https://i.dailymail.co.uk/i/newpix/2018/02/23/12/4983FD9D00000578-5426527-image-a-41_1519387515971.jpg" alt= "Two Thumbs Up From An Astronaut">
       <form class= "js-launchNextQuestion">
+      <p>You got the answer right!</p>
       <button type="submit" class="js-generateQuestionButton">Blast Off To The Next Question</button>  
       </form>
       `);

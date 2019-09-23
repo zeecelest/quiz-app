@@ -15,7 +15,7 @@ main {
   border-radius: 3px;
   padding: 20px;
   background-color: rgba(60, 60, 60, 0.7);
-  color: tan;
+  color: cornsilk;
   width: 90%;
   position: relative;
   top: 50px;
@@ -24,17 +24,20 @@ main {
   justify-content: center;
   align-items: center;
   font-family: 'Space Mono', monospace;
+  border: 3px dashed #006C89;
 }
 
 img {
   width: 70%;
   border-radius: 3px;
+  text-shadow: 1px 1px 1px white;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 35px;
-  font-weight: bolder;
-  text-decoration: underline;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -44,24 +47,35 @@ p {
 }
 
 button {
-  width: 300px;
+  width: 100%;
   margin-left:0px;
   padding-left: 5px;
   padding-right: 5px;
   font-size: 15px;
   font-family: 'Space Mono', monospace;
   font-weight:bolder;
-  background-color: white;
+  color: cornsilk;
+  background-color: transparent;
+  border: 2px solid #006C89;
+}
 
+button:hover {
+  background-color: #CA5D00;
+  border: 2px solid  #CA5D00;
 }
 
 form {
-  margin-left: 20px;
-  /* display: flex;
-  align-items: flex-start;
-  flex-direction: column; */
-  /* text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; */
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+width: 60%;
+}
+
+fieldset {
+  border: 1px solid #006C89;
+}
+
+.questionCount {
+  font-size: 15px;
+  color:  #CA5D00;
 }
