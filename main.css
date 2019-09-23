@@ -92,10 +92,25 @@ fieldset {
   position: absolute;
   top: 80%; */
 }
+span {
+  color: cornsilk;
+}
 
 @media screen and (min-width: 400px) {
   main {
     width: 80%;
+    font-size: 14px;
+  }
+  h1 {
+    font-size:18px;
+  }
+  p {
+    font-size: 14px;
+  }
+  button {
+    font-size: 12px;
+  }
+  .questionCount {
     font-size: 14px;
   }
 }
@@ -104,12 +119,36 @@ fieldset {
   main {
     width: 65%;
     font-size: 16px;
-    
+  }
+  h1 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  button {
+    font-size: 14px;
+  }
+  .questionCount {
+    font-size: 16px;
+  }
 }
 
 @media screen and (min-width: 800px) {
   main {
     width: 50%;
     font-size: 20px;
+  }
+  h1 {
+    font-size:25px;
+  }
+  p {
+    font-size:20px;
+  }
+  button {
+    font-size: 16px;
+  }
+  .questionCount {
+    font-size:16px;
   }
 }

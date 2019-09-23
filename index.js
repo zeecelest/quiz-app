@@ -158,9 +158,8 @@ function renderQuestionPage() {
             <label for = "answer-option-four">${pageObject.answers[3]}</label>
           </fieldset>
             <br>
-            <p class="questionCount">Question Number: ${
-              pageObject.questionCount
-            }/5</p>
+            <p class="questionCount">You are on question number: <span>${
+              pageObject.questionCount} out of 5.</span> <br> Your current score is: <span>${pageObject.userScore} out of 5.</span></p>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
         `
