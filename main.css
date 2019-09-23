@@ -25,6 +25,7 @@ main {
   align-items: center;
   font-family: 'Space Mono', monospace;
   border: 3px dashed #006c89;
+  font-size: 12px;
 }
 
 img {
@@ -37,21 +38,27 @@ img {
 }
 
 h1 {
-  font-size: 30px;
+  padding: 10px;
+  font-size: 15px;
   text-align: center;
 }
 
 p {
-  font-size: 20px;
+  font-size: 12px;
   text-align: center;
 }
 
 button {
+  /* position: absolute;
+  top: 90%;
+  left: 0;
+  right: 0; */
   width: 100%;
-  margin-left: 0px;
+  /* margin-left: auto;
+  margin-right: auto; */
   padding-left: 5px;
   padding-right: 5px;
-  font-size: 15px;
+  font-size: 10px;
   font-family: 'Space Mono', monospace;
   font-weight: bolder;
   color: cornsilk;
@@ -76,13 +83,33 @@ fieldset {
 }
 
 .questionCount {
-  font-size: 15px;
+  font-size: 12px;
   color: #ca5d00;
+  /* margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 80%; */
 }
 
 @media screen and (min-width: 400px) {
   main {
+    width: 80%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    width: 65%;
+    font-size: 16px;
+    
+}
+
+@media screen and (min-width: 800px) {
+  main {
     width: 50%;
-    height: 600px;
+    font-size: 20px;
   }
 }

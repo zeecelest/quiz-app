@@ -43,7 +43,7 @@ const pageObject = {
   questionCount: 0,
   question: '',
   answers: '',
-  correctAnswer: '',
+  correctAnswer: ''
 };
 
 /*if the user presses the Retake Quiz Button, these functions will
@@ -111,10 +111,10 @@ function createQuestionPageData() {
 }
 
 /*this function decides if a new question should be loaded OR if the renderEndPage should be loaded.
-*/
+ */
 
 function nextButtonAction() {
-  $('main').on('submit', '.js-launchNextQuestion', function () {
+  $('main').on('submit', '.js-launchNextQuestion', function() {
     event.preventDefault();
     pageObject.questionCount += 1;
     if (pageObject.questionCount > 5) {
@@ -124,7 +124,6 @@ function nextButtonAction() {
     }
   });
 }
-
 
 /* renderQuestionPage will listen for a submit event on the start quiz button or on the
 next question button. It will push a text string into the main section of the html document
@@ -138,22 +137,33 @@ function renderQuestionPage() {
           <form class="js-quiz-questions" action="" method="">
           <fieldset name= "selectAnAnswer">
           <legend> Select An Answer </legend>
-            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${pageObject.answers[0]} required>
+            <input type="radio" name="js-answer-options" id="answer-option-one" value= ${
+              pageObject.answers[0]
+            } required>
             <label for = "answer-option-one">${pageObject.answers[0]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${pageObject.answers[1]}>
+            <input type="radio" name="js-answer-options" id="answer-option-two" value= ${
+              pageObject.answers[1]
+            }>
             <label for = "answer-option-two">${pageObject.answers[1]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${pageObject.answers[2]}>
+            <input type="radio" name="js-answer-options" id="answer-option-three" value= ${
+              pageObject.answers[2]
+            }>
             <label for = "answer-option-three">${pageObject.answers[2]}</label>
             <br>
-            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${pageObject.answers[3]}>
+            <input type="radio" name="js-answer-options" id="answer-option-four" value= ${
+              pageObject.answers[3]
+            }>
             <label for = "answer-option-four">${pageObject.answers[3]}</label>
           </fieldset>
             <br>
+            <p class="questionCount">Question Number: ${
+              pageObject.questionCount
+            }/5</p>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
-        <p class="questionCount">Question Number: ${pageObject.questionCount}/5</p>`
+        `
   );
 }
 
@@ -163,7 +173,7 @@ either to the correct answer page or wrong answer page
 depending on if the user was right or not. */
 
 function checkUserAnswer() {
-  $('main').on('submit', '.js-quiz-questions', function () {
+  $('main').on('submit', '.js-quiz-questions', function() {
     event.preventDefault();
     let userSelected = $('input:checked').val();
     if (userSelected === pageObject.correctAnswer) {
@@ -189,7 +199,6 @@ function renderCorrectAnswerPage() {
       </form>
       `);
 }
-
 
 /*renderWrongAnswerPage will be called by checkUserAnswer if the user got the question wrong. 
 It will use .html method to push into the main element of the html.
@@ -224,7 +233,7 @@ function renderEndPage() {
 // the renderStartPage function.
 
 function renderNewQuiz() {
-  $('main').on('submit', '.js-newQuiz', function () {
+  $('main').on('submit', '.js-newQuiz', function() {
     event.preventDefault();
     renderStartPage();
   });
