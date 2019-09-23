@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: black;
   display: flex;
@@ -5,8 +9,10 @@ body {
 }
 
 main {
+  border-radius: 3px;
+  padding: 20px;
   background-color: white;
-  width: 50%;
+  width: 90%;
   position: relative;
   top: 50px;
   display: flex;
@@ -18,23 +24,33 @@ main {
 
 img {
   width: 70%;
+  border-radius: 3px;
 }
 
 h1 {
   font-size: 35px;
   font-weight: bolder;
   text-decoration: underline;
+  text-align: center;
 }
 
 p {
   font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
 button {
   font-family: 'Space Mono', monospace;
   background-color: lightblue;
+}
+
+form {
+  margin-left: 20px;
+  /* display: flex;
+  align-items: flex-start;
+  flex-direction: column; */
+  /* text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; */
 }
