@@ -96,7 +96,7 @@ span {
   color: cornsilk;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 700px) {
   main {
     width: 80%;
     font-size: 14px;
@@ -109,6 +109,10 @@ span {
     font-size: 14px;
   }
   button {
+    position: absolule;
+    bottom: 30px;
+    width: 50%;
+    margin-left: 25%;
     font-size: 12px;
   }
   .questionCount {
@@ -116,7 +120,7 @@ span {
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1200px) {
   main {
     width: 65%;
     font-size: 16px;
