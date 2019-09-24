@@ -34,7 +34,7 @@ const QUESTIONS = [
 ];
 
 /* initializing userScore and questionNumber to be 0 so that 
-we can userScore++ and questionNumber++ as our app runs. Setting Global Variables
+we can userScore++ and questionNumber++ as our app runs. Initializing keys
 for question, answers, and correctAnswers to access throughout the app. 
 */
 
@@ -49,7 +49,7 @@ const pageObject = {
 /*if the user presses the Retake Quiz Button, these functions will
 be called within the renderStartPage to set the UserScore back to 0.
 and to set the questionCount back to 0 and will reset the Question bank so
-that the questions will all be asked again. 
+that the property 'ask' will all be reset to false so that the questions can be asked again. 
 */
 
 function resetUserScore() {
@@ -99,7 +99,7 @@ function fetchPageData() {
   }
 }
 
-/* createQuestionPageData will alter the global variables
+/* createQuestionPageData will alter the pageObject values
 to allow us to access the question, answers, and correctAnswer
 for the question that we are on */
 
@@ -125,8 +125,7 @@ function nextButtonAction() {
   });
 }
 
-/* renderQuestionPage will listen for a submit event on the start quiz button or on the
-next question button. It will push a text string into the main section of the html document
+/* renderQuestionPage will be called by nextButtonAction(). It will push a text string into the main section of the html document
 using the .html() method to render the content for the question page. 
 */
 
@@ -159,7 +158,10 @@ function renderQuestionPage() {
           </fieldset>
             <br>
             <p class="questionCount">You are on question number: <span>${
-              pageObject.questionCount} out of 5.</span> <br> Your current score is: <span>${pageObject.userScore} out of 5.</span></p>
+              pageObject.questionCount
+            } out of 5.</span> <br> Your current score is: <span>${
+      pageObject.userScore
+    } out of 5.</span></p>
             <button type="submit" class="js-submitAnswerButton">Roger, Ready to check answer...</button>
         </form>
         `
@@ -167,7 +169,7 @@ function renderQuestionPage() {
 }
 
 /* this will listen for an event when the user submits their answer.
-it will check to see if their answer is correct. It will send 
+it will check to see if their answer is correct. It will send the user
 either to the correct answer page or wrong answer page 
 depending on if the user was right or not. */
 
@@ -213,7 +215,7 @@ function renderWrongAnswerPage() {
   `);
 }
 
-/*renderEndPage will be called by nextButtonAction if the question count > 5.
+/*renderEndPage will be called by nextButtonAction() if the question count > 5.
 it uses .html method to push into the main element.
 */
 
@@ -221,7 +223,7 @@ function renderEndPage() {
   $('main').html(`
   <h1>Mission Complete</h1>
   <img src ="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F582161602%2F960x0.jpg%3Ffit%3Dscale" alt= "Astronaut waves from space">
-  <p>You answered ${pageObject.userScore} out of 5 questions correct!</p>
+  <p>You answered ${pageObject.userScore} out of 5 questions correctly!</p>
   <form class= "js-resetNewQuiz">
   <button type="submit" class="js-ResetQuizButton">Repeat Mission?
   </button>
